@@ -35,7 +35,7 @@ public class AwtExample extends Frame {
     add(checkbox3);
     add(textField);
     add(list);
-    setSize(150, 150);
+    setSize(1200, 740);
     setTitle("This is my First AWT example");
     setLayout(new FlowLayout());
     setVisible(true);
