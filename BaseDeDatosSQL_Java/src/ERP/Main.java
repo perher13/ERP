@@ -1,16 +1,23 @@
 package ERP;
 
 import java.util.Scanner;
+import java.awt.Button;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.mysql.jdbc.*;
-import com.mysql.jdbc.Statement;
 
-import CicloSpuerior2.BaseDeDatos;
-import ConexionClase.Conexion;
+import java.awt.*;
+import java.awt.event.*;
+
+//import CicloSpuerior2.BaseDeDatos;
+//import ConexionClase.Conexion;
 
 public class Main {
 
@@ -22,6 +29,7 @@ public class Main {
 	private static final String driver = "com.mysql.jdbc.Driver";
 	
 	public static void main(String[] args) throws SQLException {
+	
 	String nombreTabla = null;	
 	
 	
@@ -55,6 +63,10 @@ public class Main {
 		
 		
 		do {
+
+
+
+
 			System.out.println("***************");
 			System.out.println("*****MENU******");
 			System.out.println("***************");
@@ -79,7 +91,7 @@ public class Main {
 			
 			System.out.println("0. Salir del programa");
 			
-			System.out.print("Opción: ");
+			System.out.print("Opcion: ");
 			opcion = sc.nextInt();
 			
 			
@@ -134,6 +146,7 @@ public class Main {
 				case 12:
 					ua.eliminarCliente();
 					break;
+
 					
 				case 0:
 					System.out.print("El programa ha finalizado");
@@ -158,7 +171,11 @@ public class Main {
 		}
 	}
 }
+
+
 }
+
+
 	
 	
 	

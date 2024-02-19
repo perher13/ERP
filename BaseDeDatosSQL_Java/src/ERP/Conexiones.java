@@ -3,13 +3,17 @@ package ERP;
 
 import com.mysql.jdbc.Connection;
 
-import ConexionClase.montana;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+
+//import ConexionClase.montana;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Conexiones {
@@ -32,8 +36,8 @@ public class Conexiones {
 			System.out.println("Error al conectar"+e);
 		}
 	}
-	
-	public static void crearTrabajadores() throws SQLException, InterruptedException{
+
+	public static void crearTrabajadores() throws SQLException, InterruptedException, NoSuchAlgorithmException{
 	
 		Scanner sc = new Scanner(System.in);
 		
@@ -45,14 +49,20 @@ public class Conexiones {
 		
 		System.out.print("Introduce el nombre del nuevo trabajador/a: ");
 		nombre = sc.next();
-		System.out.print("Introduce el mail del nuevo trabajador/a: ");
-		mail = sc.next();
-		System.out.print("Introduce la contraseña del nuevo trabajador/a: ");
-		password = sc.next();
+
+		String[] symbols = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"};
+		int length = 10;
+		Random random = SecureRandom.getInstanceStrong(); // as of JDK 8, this should return the strongest algorithm available to the JVM
+		StringBuilder sb = new StringBuilder(length);
+		for (int i = 0; i < length; i++) {
+    		int indexRandom = random.nextInt( symbols.length );
+    		sb.append( symbols[indexRandom] );
+		}
+		String pass = sb.toString();
 		
-		w.setMail(mail);
+		w.setMail(nombre + "@oceano.com");
 		w.setNombre(nombre);
-		w.setPassword(password);
+		w.setPassword(pass);
 		
 		String sql = "INSERT INTO `" + nombreBD + "`.`usuarios` (`nombre`, `mail`, `password`) VALUES ('"
 				+ w.getNombre() + 
@@ -230,6 +240,7 @@ public class Conexiones {
 		
 		
 		String sql = ("SELECT * FROM `" + nombreBD + "`.`usuarios`");
+		System.out.println(" | id | Nombre | Mail | Password |");
 		
 		try {
 			st = conn.createStatement();
@@ -240,8 +251,10 @@ public class Conexiones {
 				String nombre = rs.getString("nombre");
 				String mail = rs.getString("mail");
 				String password = rs.getString("password");
+
+
 				
-				System.out.println("ID: " + id + ", Nombre: " + nombre + ", Mail: " + mail + ", Password: " + password);
+				System.out.println(" | " + id + " | " + nombre + " | " + mail + " | " + password + " | ");
 			}
 			
 		}finally {
